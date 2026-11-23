@@ -242,3 +242,61 @@ El registro también acepta opcionalmente `nombres`, `apellidos` y `telefono`.
 - El cliente consulta sus vehículos, espacios disponibles, reservas, estancias, pagos y puntos.
 - El administrador gestiona ocupación, ingresos y salidas, alertas, pagos, vehículos, fidelización y usuarios.
 - La eliminación definitiva de una cuenta elimina sus datos asociados y requiere confirmación.
+
+## Ficha de entrega y alcance
+
+Este repositorio es una copia independiente de MiParqueo App. No es el repositorio canónico de entrega ni se actualiza automáticamente con el repositorio integrado.
+
+- Repositorio: https://github.com/probandoel44/appMiparqueo
+- Rama y versión base consultada antes de esta documentación: `main`, commit `f321e5db81f6803fa94736f9baea4f073e0dd98f`.
+- Versión canónica recomendada: https://github.com/probandoel44/Desarrollar-software-a-partir-de-la-integraci-n-de-sus-m-dulos-componentes, rama `main`.
+- Este README documenta esta copia; no afirma que incluya los cambios posteriores del repositorio canónico.
+
+## Componentes y entradas/salidas
+
+La copia contiene una aplicación Java/Spring Boot organizada en controladores, servicios, repositorios, modelos y vistas. El flujo web pasa del formulario al controlador, del controlador a la lógica/persistencia y vuelve a una vista HTML. La base de datos documentada usa usuarios, parqueaderos, espacios, vehículos, reservas, movimientos, pagos, ubicación, fidelización y notificaciones.
+
+| Componente | Entradas observables | Salidas/efectos | Requerimientos relacionados |
+| --- | --- | --- | --- |
+| Autenticación | Correo/usuario y contraseña; registro con datos de cuenta opcionales. | Respuesta de API y sesión web. | Acceso a los flujos; validar su cobertura con el informe oficial. |
+| Vehículos y reservas | Datos de vehículo; vehículo, espacio y fechas de reserva según la interfaz/código de esta copia. | Registros persistidos y actualización de disponibilidad, si la operación existe en esta versión. | Disponibilidad/reservas; no atribuir extensión, notificaciones ni concurrencia sin probar esta versión. |
+| Movimientos y pagos | Datos del ingreso/salida y placa según los formularios existentes. | Historial y datos asociados de pago cuando las rutas los soportan. | Registro de entrada/salida; reconocimiento físico no documentado aquí. |
+| Paneles y administración | Solicitudes de páginas y acciones del usuario autenticado. | Vistas HTML con información del sistema. | Consulta de historial y operación; permisos sujetos a la configuración del código. |
+
+Los nombres de campos, validaciones y estados exactos deben verificarse en esta copia antes de usarlos en un informe de pruebas. Los ejemplos de API anteriores en este README usan datos ficticios.
+
+## Evidencia SENA: estado
+
+| Elemento | Evidencia en esta copia | Estado |
+| --- | --- | --- |
+| Requerimientos e informe de evaluación | No se incluyeron el informe oficial ni `requerimientos.pdf`. | Pendiente; contrastar esta copia con los documentos oficiales. |
+| Aprobación de requerimientos | No se encontró un acta de aprobación. | Pendiente; no equivale a aprobación por tener una lista de requisitos. |
+| Control de versiones | Repositorio público GitHub, rama `main`. | Disponible; registrar el commit de entrega posterior a este README. |
+| Ejecutable | El proyecto Spring Boot puede construirse como JAR con Maven; no se verificó un JAR en este repositorio. | Pendiente de generar y asociar a un commit. No corresponde entregar un `.exe`. |
+| URL desplegada | Solo se documentan rutas locales `localhost:8081`. | No hay despliegue público verificado. |
+| Pruebas | El comando documentado para pruebas es `.\mvnw.cmd test`; no se adjuntó resultado ligado al commit de esta copia. | No verificadas para esta versión. Ejecutar y archivar el reporte. |
+| Servidor y base de datos | README: Java 17, MySQL 8, puerto local 8081, esquema SQL y `ddl-auto=validate`. | Configuración local documentada; separar producción y pruebas antes de entregar. |
+| Manual técnico | Instalación, SQL, ejecución, autenticación y paneles descritos en el README. | Parcial; faltan resultados de prueba, URL de despliegue y documentación de aprobación. |
+
+## Ambiente y verificación
+
+Requisitos documentados: Java 17 y MySQL 8. Crear una base vacía, ejecutar el esquema de la sección Base de datos y ejecutar desde la raíz de este repositorio:
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+Pruebas, en una base aislada cuyo esquema coincida:
+
+```powershell
+.\mvnw.cmd test
+```
+
+No se ejecutaron esos comandos al preparar esta ficha. El evaluador debe usar un usuario y clave propios, no credenciales reales compartidas. No se encontraron migraciones automatizadas ni un perfil de pruebas separado. Las direcciones `localhost` solo sirven en la máquina que ejecuta la aplicación.
+
+## Pendientes
+
+1. Adjuntar el informe oficial, `requerimientos.pdf` y el acta auténtica si existe.
+2. Comparar esta copia con el commit canónico y decidir si se conserva como antecedente.
+3. Ejecutar y registrar pruebas para el commit exacto de esta copia.
+4. Generar y verificar el JAR y aportar una URL de despliegue si existe.
